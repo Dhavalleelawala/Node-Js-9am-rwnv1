@@ -1,0 +1,18 @@
+import express from "express";
+import dotenv from "./configs/dotenv.js";
+import router from "./routers/index.js";
+
+const app = express();
+const port = dotenv.PORT || 3000;
+
+app.set('view engine','ejs');
+app.use(express.static('public'));
+
+app.use('/',router);
+
+app.listen(port,(err)=>{
+    if(!err){
+        console.log("Server started.");        
+        console.log("http://localhost:"+port);        
+    }
+})
