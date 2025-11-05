@@ -1,9 +1,11 @@
 import { Router } from "express";
-import { homePage } from "../controllers/client/index.js";
 import adminPanelRouter from "./server/adminPanel.route.js";
+import client from "./client/index.js"
 
 const router = Router();
 
-router.use('/server',adminPanelRouter)
+router.use('/admin',adminPanelRouter)
+router.use('/',client);
+
 
 export default router;
