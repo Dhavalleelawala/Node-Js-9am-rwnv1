@@ -11,6 +11,8 @@ adminRouter.get('/login',adminCtl.loginPage);
 adminRouter.post('/login',adminCtl.login);
 
 adminRouter.get('/',userAuth, adminCtl.dashboard);
+adminRouter.get('/logout',userAuth, adminCtl.logout);
+adminRouter.get('/get-all-users',userAuth, adminCtl.getAllUsersPage);
 
 
 

@@ -56,6 +56,16 @@ const adminController = {
       console.log(error.message);      
       return res.redirect(req.get('Referrer') || '/');
     }
+  },
+  logout(req,res){
+    res.clearCookie('id');
+    return res.redirect('/login');
+  },
+  async getAllUsersPage(req,res){
+      const users = await User.find({});
+      return res.render('./pages/get-all-users.ejs',{
+        users
+      });
   }
 };
 
