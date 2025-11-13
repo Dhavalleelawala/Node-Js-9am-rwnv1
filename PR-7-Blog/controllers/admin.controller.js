@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 
 
 const adminController = {
-  dashboard(req, res) {
+  dashboard(req, res) { 
     return res.render("./index.ejs");
   },
   signupPage(req,res){
@@ -33,7 +33,7 @@ const adminController = {
     try {
       const {email,password} = req.body;
 
-      let user = await User.findOne({email});
+      let user = await User.findOne({email,isActive:true});
       
       if(user){
 

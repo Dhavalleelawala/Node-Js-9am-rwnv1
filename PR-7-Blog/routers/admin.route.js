@@ -10,9 +10,11 @@ adminRouter.post('/signup',adminCtl.signup);
 adminRouter.get('/login',adminCtl.loginPage);
 adminRouter.post('/login',adminCtl.login);
 
-adminRouter.get('/',userAuth, adminCtl.dashboard);
-adminRouter.get('/logout',userAuth, adminCtl.logout);
-adminRouter.get('/get-all-users',userAuth, adminCtl.getAllUsersPage);
+
+adminRouter.use(userAuth);
+adminRouter.get('/', adminCtl.dashboard);
+adminRouter.get('/logout', adminCtl.logout);
+adminRouter.get('/get-all-users', adminCtl.getAllUsersPage);
 
 
 

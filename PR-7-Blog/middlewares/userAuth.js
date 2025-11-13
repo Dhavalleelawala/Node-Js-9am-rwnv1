@@ -1,6 +1,12 @@
-const userAuth = (req,res,next)=>{
+import User from "../models/user.model.js";
+
+const userAuth = async(req,res,next)=>{
     const {id} = req.cookies;
-    if(id){
+
+    const user = await User.findById(id);
+
+    if(user){
+        res.locals.user = user;
         next();
     }else{
         return res.redirect('/login');
