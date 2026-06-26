@@ -1,81 +1,75 @@
+# 📋 Todo App
 
-# 🚀 Express.js Web Application
+A simple and responsive Todo Application built with **React.js**, **Axios**, and **JSON Server**. The application allows users to create, view, and delete todos through REST APIs.
 
-A simple Node.js and Express.js web application using EJS as a template engine, MongoDB for database connection, and Cookie Parser for handling cookies.
-
----
-
-## 📌 Features
-
-- Express.js Server Setup
-- EJS Template Engine
-- MongoDB Database Connection
-- Environment Variables using Dotenv
-- Static File Management
-- Upload Folder Support
-- Cookie Management
-- Routing System
-- MVC Folder Structure
+![React](https://img.shields.io/badge/React-19-blue?logo=react)
+![Axios](https://img.shields.io/badge/Axios-API-orange)
+![JSON Server](https://img.shields.io/badge/JSON--Server-REST-green)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
 ---
 
-## 🛠️ Technologies Used
+## 🚀 Features
 
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-- EJS
-- Dotenv
-- Cookie Parser
+- ➕ Add New Todo
+- 📋 Display All Todos
+- ❌ Delete Todo
+- 🔄 Real-Time Data Updates
+- 🌐 REST API Integration
+- 📱 Responsive UI with Bootstrap
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- React.js
+- Vite
+- Bootstrap 5
+- Axios
+
+### Backend
+- JSON Server (Fake REST API)
 
 ---
 
 ## 📂 Project Structure
 
 ```bash
-project/
-│
-├── configs/
-│   ├── db.js
-│   └── dotenv.js
-│
-├── routers/
-│   └── index.js
-│
-├── uploads/
+todo-app/
 │
 ├── public/
-│   ├── css/
-│   ├── js/
-│   └── images/
+├── src/
+│   ├── api/
+│   │   └── apiInstence.js
+│   ├── assets/
+│   ├── App.jsx
+│   └── main.jsx
 │
-├── views/
-│   └── *.ejs
-│
-├── app.js
+├── db.json
 ├── package.json
-├── .env
-└── README.md
+├── vite.config.js
+├── README.md
+└── .gitignore
 ```
 
 ---
 
 ## ⚙️ Installation
 
-### Step 1: Clone Repository
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/project-name.git
+git clone https://github.com/your-username/todo-app.git
 ```
 
-### Step 2: Move to Project Directory
+### 2. Navigate to Project Directory
 
 ```bash
-cd project-name
+cd todo-app
 ```
 
-### Step 3: Install Dependencies
+### 3. Install Dependencies
 
 ```bash
 npm install
@@ -83,173 +77,144 @@ npm install
 
 ---
 
-## 📦 Required Packages
+## 📦 Install Required Packages
 
 ```bash
-npm install express ejs mongoose dotenv cookie-parser
-```
-
-For development:
-
-```bash
-npm install nodemon --save-dev
+npm install axios bootstrap
+npm install json-server --save-dev
 ```
 
 ---
 
-## 🔧 Environment Variables
+## 🗄️ Setup Database
 
-Create a `.env` file in the root directory.
-
-```env
-PORT=3000
-MONGO_URL=mongodb://127.0.0.1:27017/your_database_name
-JWT_SECRET=your_secret_key
-```
-
----
-
-## ▶️ Run Project
-
-### Production Mode
-
-```bash
-npm start
-```
-
-### Development Mode
-
-```bash
-npm run dev
-```
-
----
-
-## 📝 Package.json Scripts
+Create a `db.json` file in the root directory:
 
 ```json
-"scripts": {
-  "start": "node app.js",
-  "dev": "nodemon app.js"
+{
+  "todos": []
 }
 ```
 
 ---
 
-## 🌐 Server URL
+## ▶️ Start JSON Server
 
+```bash
+npx json-server --watch db.json --port 3000
 ```
-http://localhost:3000
+
+API URL:
+
+```bash
+http://localhost:3000/todos
 ```
 
 ---
 
-## 📄 Main Server File
+## ▶️ Start React Application
+
+```bash
+npm run dev
+```
+
+Application URL:
+
+```bash
+http://localhost:5173
+```
+
+---
+
+## 🔗 API Endpoints
+
+| Method | Endpoint | Description |
+|---------|-----------|-------------|
+| GET | `/todos` | Get all todos |
+| POST | `/todos` | Create a new todo |
+| DELETE | `/todos/:id` | Delete a todo |
+
+---
+
+## 📸 Screenshots
+
+### Add Todo
+
+- Enter a todo title.
+- Click **Add Todo**.
+
+### Todo List
+
+- Displays all todos in a table.
+
+### Delete Todo
+
+- Click the **Delete** button to remove a todo.
+
+---
+
+## 💻 Example Data
+
+```json
+[
+  {
+    "id": "1",
+    "title": "Learn React"
+  },
+  {
+    "id": "2",
+    "title": "Learn Axios"
+  }
+]
+```
+
+---
+
+## ⚙️ Axios Configuration
 
 ```javascript
-import express from "express";
-import dotenv from "./configs/dotenv.js";
-import router from "./routers/index.js";
-import db from "./configs/db.js";
-import cookieParser from "cookie-parser";
+import axios from "axios";
 
-const app = express();
-const port = dotenv.PORT || 3000;
-
-app.set('view engine', 'ejs');
-
-app.use(express.static('public'));
-app.use('/uploads', express.static('uploads'));
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-
-app.use('/', router);
-
-app.listen(port, () => {
-    console.log("Server started.");
-    console.log(`http://localhost:${port}`);
+const apiInstence = axios.create({
+  baseURL: "http://localhost:3000"
 });
+
+export default apiInstence;
 ```
 
 ---
 
-## 📌 API Routes
+## 🧩 Project Functionalities
 
-| Method | Route | Description |
-|--------|--------|-------------|
-| GET | / | Home Page |
-| GET | /login | User Login |
-| GET | /register | User Registration |
-| POST | /login | Login User |
-| POST | /register | Register User |
-
-> Add more routes according to your project requirements.
-
----
-
-## 📁 Static Files
-
-### Public Folder
+### Create Todo
 
 ```javascript
-app.use(express.static('public'));
+await apiInstence.post('/todos', todo);
 ```
 
-Used for:
-
-- CSS Files
-- JavaScript Files
-- Images
-
-### Upload Folder
+### Get All Todos
 
 ```javascript
-app.use('/uploads', express.static('uploads'));
+await axios.get('http://localhost:3000/todos');
 ```
 
-Used for:
-
-- User Uploaded Images
-- Documents
-- Profile Pictures
-
----
-
-## 🍪 Cookie Parser
+### Delete Todo
 
 ```javascript
-app.use(cookieParser());
-```
-
-Used for:
-
-- Authentication Tokens
-- Session Management
-- User Preferences
-
----
-
-## 🗄️ Database Connection
-
-Example:
-
-```javascript
-mongoose.connect(process.env.MONGO_URL)
-.then(() => console.log("Database Connected"))
-.catch(err => console.log(err));
+await apiInstence.delete('/todos/' + id);
 ```
 
 ---
 
-## 🚀 Future Enhancements
+## 🔮 Future Improvements
 
-- User Authentication using JWT
-- Role Based Authentication
-- Admin Dashboard
-- File Upload System
-- Password Reset Functionality
-- Email Verification
-- REST API Integration
+- ✏️ Edit Todo
+- ✅ Mark Todo as Completed
+- 🔍 Search Todo
+- 📅 Add Due Date
+- 🌙 Dark Mode
+- 🔐 User Authentication
+- ☁️ MongoDB Integration
 
 ---
 
@@ -257,11 +222,20 @@ mongoose.connect(process.env.MONGO_URL)
 
 **Dhaval Leelawala**
 
-- Full Stack Developer
-- MERN Stack Enthusiast
+- MERN Stack Developer
+- React.js & Node.js Enthusiast
+
+### Connect with Me
+
+- GitHub: https://github.com/your-username
+- LinkedIn: https://linkedin.com/in/your-profile
 
 ---
 
 ## 📜 License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
+
+---
+
+⭐ If you found this project useful, please give it a **Star** on GitHub!
